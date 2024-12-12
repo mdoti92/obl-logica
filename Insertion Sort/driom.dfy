@@ -86,10 +86,10 @@ method InsertionSort(A: array<int>)
             assert A[j+2..i+1] == A''[j+2..i+1] == A'[j+1..i]; // chequearlo
 
             j := j - 1;
-            sortedSeqSubsequenceSorted(A', j+1, i);
+            sortedSeqSubsequenceSorted(A', j+1, i); // sacar este o la linea de abajo
             assert sortedBetweenIndexs(A', j+1, i);
-            assert A[j+2 .. i+1] == A'[j+1 .. i];
-            assert sortedBetweenIndexs(A, j+2, i+1);
+            assert A[j+2 .. i+1] == A'[j+1 .. i]; // chequarlo
+            assert sortedBetweenIndexs(A, j+2, i+1); // chequearlo
         }
     }
 }
