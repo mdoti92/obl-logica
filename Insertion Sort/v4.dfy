@@ -20,7 +20,7 @@
   method InsertionSortSort(a: array<int>)
     modifies a
     requires a.Length >= 2
-    ensures Ordered(a,0,a.Length)
+    ensures Sorted(a)
   {
     for i := 1 to a.Length
       invariant Ordered(a,0,i)
@@ -31,11 +31,9 @@
         invariant Ordered(a,0,j)
         invariant Preserved(a,0,a.Length)
       {
-      if a[j] > a[j+1] {
-        var tmp := a[j];
-        a[j] := a[j+1];
-        a[j+1] := tmp;
-      }
+        if a[j] > a[j+1] {
+          a[j], a[j+1] := a[j+1], a[j];
+        }
       }
 
     }
