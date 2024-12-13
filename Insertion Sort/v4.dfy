@@ -4,7 +4,7 @@
     Ordered(a,0,a.Length) && Preserved(a,0,a.Length)
   }
 
-  predicate Ordered(a: array<int>, left: nat, right: nat)
+  ghost predicate Ordered(a: array<int>, left: nat, right: nat)
     reads a
     requires left <= right <= a.Length
   {
@@ -17,9 +17,10 @@
   {
     multiset(a[left..right]) == multiset(old(a[left..right]))
   }
-    method InsertionSortSort(a: array<int>)
+  method InsertionSortSort(a: array<int>)
     modifies a
-    ensures Sorted(a)
+    requires a.Length >= 2
+    ensures Ordered(a,0,a.Length)
   {
     for i := 1 to a.Length
       invariant Ordered(a,0,i)
@@ -27,7 +28,7 @@
     {
       var minValue := a[i];
       var minPos := i;
-      for j := i - 1 to 0
+      for j := i - 1 downto 0
         invariant j < i
       {
         var tmp := a[j];
