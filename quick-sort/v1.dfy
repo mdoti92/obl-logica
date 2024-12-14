@@ -23,9 +23,8 @@ method QuickSort(a: array<int>, left: int, right: int)
     requires 0 <= left <= right <= a.Length
     ensures Sorted(a, left, right)
 {
-    if left < right {
-        var indexPivot : int := (left + right) / 2;    
-        var pivot := a[indexPivot];
+    if left < right { 
+        var pivot := a[left];
         var i := left;
         var j := right;
         while i <= j 
@@ -33,10 +32,6 @@ method QuickSort(a: array<int>, left: int, right: int)
         invariant left - 1 <= j <= right
         invariant Preserved(a, left, right)
         {
-            while a[i] < pivot
-            {
-                i := i + 1;
-            }
             while a[j] > pivot 
             {
                 j := j - 1;
